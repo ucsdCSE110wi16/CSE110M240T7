@@ -1,6 +1,5 @@
 import java.awt.Font;
 
-
 public class Timer {
 	
 	// Timer Variables
@@ -9,10 +8,10 @@ public class Timer {
 	private long start;
 	private long end;
 
- /**
-  * Constructor. Calls init() method to initialize timer variables
-  * @param time - The time to start and begin counting down
-  */
+ 	/**
+	 * Constructor. Calls init() method to initialize timer variables
+	 * @param time - The time to start and begin counting down
+	 */
 	public Timer(int time) {
 		init(time);
 	}
