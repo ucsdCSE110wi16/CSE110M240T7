@@ -63,3 +63,12 @@
  - Priority: 3
  - Time: 3 days
  
+ 1. Color scheme
+  - as a user
+  - I want a title in red, ingredients in yellow, and instructions alternating
+  in blue and yellow
+  - because I like to make work for other people to do who already have a lot
+  - going on in their lives and not much time to commit to this class
+  - priority: 2
+  - time: 3 days
+

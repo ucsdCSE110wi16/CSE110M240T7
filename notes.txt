@@ -1,0 +1,1 @@
+on open, three buttons: search by ingredients, search by recipe, and favorits
