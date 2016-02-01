@@ -5,4 +5,7 @@
     <string name="ingredient_list">Ingredients:</string>
     <string name="instruction_list">Instructions:</string>
     <string name="totalTime">Total Time: </string>
+    <string name="title_activity_recipe_create">RecipeCreate</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
