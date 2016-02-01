@@ -1,10 +1,8 @@
-import java.awt.Font;
 
 public class Timer {
 	
 	// Timer Variables
 	private int timeRemain;
-	private Font timeFont;
 	private long start;
 	private long end;
 
@@ -37,7 +35,6 @@ public class Timer {
 	 */
 	private void init(int time) {
 		timeRemain = time;
-		timeFont = new Font("Arial", Font.BOLD, 10);
 		start = System.nanoTime() / 1000000;
 	}
 	
