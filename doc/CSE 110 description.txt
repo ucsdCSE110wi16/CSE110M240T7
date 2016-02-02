@@ -1,0 +1,15 @@
+One of the struggles of being a college student is eating meals that are
+both healthy and cheap. Our proposal to remedy this problems is a mobile
+application that is essentially a cookbook of various recipes. This
+cookbook app would have a database of many recipes with instructions on how
+to cook them. The app would also allow you to save recipes that you like
+locally to your phone so that you can access them easily. Another feature
+of this app would be to take the ingredients that you already have in your
+fridge and show the recipes that can be made using them. The app should
+have a simplistic design, making it lightweight and easy for the user to
+utilize its features. There should also be a wide diversity of recipes that
+will fit one's food needs any time of the day. The app's design should be
+lightweight and minimalistic, centering around making the information and
+recipes easy to access. The app should have a feature that filters the
+recipes as well. Some categories could be based on time to prepare, which
+meal of the day it is, or what culture the food initially came from.
