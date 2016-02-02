@@ -2,6 +2,7 @@ package com.example.monroe.cse110recipes;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static HashMap<Integer, Recipe> recipes = new HashMap<Integer, Recipe>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +30,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
+        String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
+                "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
+                "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
 
         final ArrayList<String> list = new ArrayList<String>();
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
-            list2.add(new Recipe(values[i], 30, 2));
+            Recipe r = new Recipe(values[i], 30, 2);
+            list2.add(r);
+            recipes.put(r.id, r);
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 final Recipe item = (Recipe) parent.getItemAtPosition(position);
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                 alertDialog.setTitle("Alert");
-                alertDialog.setMessage("id: "+item.id);
+                alertDialog.setMessage("id: " + item.id);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 alertDialog.show();
+                Intent myIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                myIntent.putExtra("RecipeID", item.id); //Optional parameters
+                startActivity(myIntent);
 //                view.animate().setDuration(2000).alpha(0)
 //                        .withEndAction(new Runnable() {
 //                            @Override
