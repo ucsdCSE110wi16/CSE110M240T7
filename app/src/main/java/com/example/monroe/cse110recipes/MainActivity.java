@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static HashMap<Integer, Recipe> recipes = new HashMap<Integer, Recipe>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
-            list2.add(new Recipe(values[i], 30, 2));
+            Recipe r = new Recipe(values[i], 30, 2);
+            list2.add(r);
+            recipes.put(r.id, r);
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);

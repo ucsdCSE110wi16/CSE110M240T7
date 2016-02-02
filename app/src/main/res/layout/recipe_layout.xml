@@ -15,7 +15,8 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.monroe.cse110recipes.MainActivity"
         tools:showIn="@layout/activity_main"
-        android:background="#ff0000">
+        android:background="#faf9f6">
+
 
         <TextView android:id="@+id/recipe"
             android:layout_width="match_parent"
@@ -24,7 +25,9 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="32sp"
-            android:text="@string/recipe_name" />
+            android:text="@string/recipe_name"
+            android:textColor='#FF0000'/>
+
         <TextView android:id="@+id/cook_Time"
             android:layout_width = "match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +35,8 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="27sp"
-            android:text="@string/totalTime" />
+            android:text="@string/totalTime"
+            android:textColor="#FF071FF7"/>
 
         <TextView android:id="@+id/ingredients"
             android:layout_width= "match_parent"
@@ -40,7 +44,8 @@
             android:layout_below="@id/cook_Time"
             android:layout_alignParentLeft="true"
             android:textSize="25sp"
-            android:text="@string/ingredient_list"/>
+            android:text="@string/ingredient_list"
+            android:textColor="#FFF5E509"/>
 
         <TextView android:id="@+id/instructions"
             android:layout_width= "wrap_content"
@@ -49,5 +54,10 @@
             android:layout_alignParentLeft="true"
             android:textSize="25sp"
             android:text="@string/instruction_list" />
+
+        <ImageButton android:id="@+id/myButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android/>
     </RelativeLayout>
 </ScrollView>
