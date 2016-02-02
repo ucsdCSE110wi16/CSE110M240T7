@@ -17,6 +17,39 @@ public class Recipe {
     int id; //id of the recipe??
     private static int _id = 0;
 
+    //setter methods
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setMinutes(int minutes){
+        this.minutes = minutes;
+    }
+
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    //Getter methods
+    public String getName(){
+        return name;
+    }
+    public int getMinutes(){
+        return minutes;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public int getRating(){
+        return rating;
+    }
+
     //basic constructor
     public Recipe () {
 

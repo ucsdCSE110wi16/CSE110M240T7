@@ -29,7 +29,7 @@ public class RecipeActivity extends AppCompatActivity {
         Recipe r = MainActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
 
-        //((TextView)findViewById(R.id.cook_Time)).setText(r.minutes);
+        ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
     }
 
 }

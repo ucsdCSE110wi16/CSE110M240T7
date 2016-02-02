@@ -23,6 +23,7 @@
             android:gravity="center"
             android:textSize="32sp"
             android:text="@string/recipe_name" />
+
         <TextView android:id="@+id/cook_Time"
             android:layout_width = "match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +31,8 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="27sp"
-            android:text="@string/totalTime" />
+            android:text="@string/totalTime"
+            android:textStyle="bold"/>
 
         <TextView android:id="@+id/ingredients"
             android:layout_width= "match_parent"
@@ -38,7 +40,8 @@
             android:layout_below="@id/cook_Time"
             android:layout_alignParentLeft="true"
             android:textSize="25sp"
-            android:text="@string/ingredient_list"/>
+            android:text="@string/ingredient_list"
+            android:textStyle="bold"/>
 
         <TextView android:id="@+id/instructions"
             android:layout_width= "wrap_content"
