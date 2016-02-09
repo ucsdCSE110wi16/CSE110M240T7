@@ -1,12 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
 
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/img1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:alpha="0.8" />
 
     <Button
         android:layout_width="wrap_content"
@@ -14,8 +23,12 @@
         android:text="Search by Recipe"
         android:id="@+id/button3"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="searchByRecipeClick" />
+        android:onClick="searchByRecipeClick"
+        android:padding="20dip"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignEnd="@+id/button4"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4" />
 
     <Button
         android:layout_width="wrap_content"
@@ -24,7 +37,8 @@
         android:id="@+id/button4"
         android:layout_above="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:onClick="searchByIngredientsClick" />
+        android:onClick="searchByIngredientsClick"
+        android:padding="20dip" />
 
     <Button
         android:layout_width="wrap_content"
@@ -32,6 +46,10 @@
         android:text="Favorites"
         android:id="@+id/button5"
         android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:onClick="searchByFavoritesClick" />
+        android:onClick="searchByFavoritesClick"
+        android:padding="20dip"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3" />
 </RelativeLayout>

@@ -36,10 +36,10 @@
         <activity
             android:name=".RecipeActivity"
             android:label="@string/title_activity_recipe"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".RecipeListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.monroe.cse110recipes.MainActivity" />
+                android:value="com.example.monroe.cse110recipes.RecipeListActivity" />
         </activity>
         <activity
             android:name=".RecipeListActivity"
