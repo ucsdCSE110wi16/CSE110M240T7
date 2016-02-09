@@ -15,6 +15,7 @@ public class Recipe {
     int minutes; //time to cook
     int rating; //rating of the recipe
     int id; //id of the recipe??
+    boolean favorite = false;
     private static int _id = 0;
 
     //setter methods
