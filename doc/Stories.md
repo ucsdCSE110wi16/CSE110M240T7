@@ -81,3 +81,15 @@
  - So that I can either create or look for other recipes
  - priority: 3
  - time: 1 week
+
+12. Add Recipe --NOT STARTED--
+ - As a user
+ - I want to add a recipe to my list of recipes
+ - So that I can view it later
+ - time: 1 week  
+
+13. Delete Recipe --NOT STARTED--
+ - As a user
+ - I want to delete a selected recipe
+ - So that I do not view an unwanted recipe
+ - time: 1 week
