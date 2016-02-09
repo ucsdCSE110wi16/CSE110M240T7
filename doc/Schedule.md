@@ -21,7 +21,10 @@
  - Add ability to favorite to Recipe view
  
 1. Week 6
- - 
+ - Enable the app to create, edit, and delete recipes
+ - Continue ingredients filtering, name filtering
+ - Have favorites be on the top of the list
+
 1. Week 7
  - 
 1. Week 8
