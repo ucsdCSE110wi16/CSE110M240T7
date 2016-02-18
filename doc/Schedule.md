@@ -26,11 +26,20 @@
  - Have favorites be on the top of the list
 
 1. Week 7
- - 
+ - Continue working on recipe management functionality
+ - Enable storage of recipes (via SQLite)
+ - Fix memory leaks
+ 
 1. Week 8
- - 
+ - Depending on week 7: whether recipe management functionality has been
+   implemented
+ - Continue working on filtering
+ - (react to user feedback)
+
 1. Week 9
- - 
+ - Enable screenshot of final result of food
+ 
 1. Week 10
- - 
+ - Finished product (all fucntionality necessary available)
+ - Possibly cosmetic overrides (in-app purchase options, if time permits)
  

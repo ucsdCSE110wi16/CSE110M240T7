@@ -22,7 +22,7 @@
  - Priority: 2
  - Time: 3 days
 
-4. Favorite --NOT STARTED--
+4. Favorite --COMPLETED BY MW--
  - As a user
  - I want to be able to favorite a recipe and view favorited recipes
  - so that I can revisit my favorite recipes easily
