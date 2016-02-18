@@ -2,9 +2,9 @@ package com.example.monroe.cse110recipes;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 public class RecipeActivity extends AppCompatActivity {
@@ -31,6 +31,7 @@ public class RecipeActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Recipe r = RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         currentRecipe = r;
+        Log.d("tag", currentRecipe.favorite?"favorited":"not");
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
 
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
@@ -77,6 +78,8 @@ public class RecipeActivity extends AppCompatActivity {
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(false);
             currentRecipe.favorite = true;
         }
+        Log.d("tag", currentRecipe.favorite?"favorited":"not");
+        Log.d("tag", RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID")).favorite?"favorited":"not");
 
         return super.onOptionsItemSelected(item);
     }

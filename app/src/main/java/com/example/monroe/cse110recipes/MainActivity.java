@@ -1,9 +1,9 @@
 package com.example.monroe.cse110recipes;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +22,15 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
 //        final ActionBar ab = getSupportActionBar();
+        Log.d("tag", "hii");
+
 
         ImageView i = (ImageView)findViewById(R.id.img1);
-        i.setBackgroundResource(R.drawable.gif);
+        i.setBackgroundResource(R.drawable.ness);
+        //i.setBackgroundResource(R.drawable.gif);
 
-        AnimationDrawable pro = (AnimationDrawable)i.getBackground();
-        pro.start();
+//        AnimationDrawable pro = (AnimationDrawable)i.getBackground();
+//        pro.start();
     }
 
     public void searchByIngredientsClick(View v){

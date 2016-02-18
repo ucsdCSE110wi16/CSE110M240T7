@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class RecipeListActivity extends AppCompatActivity {
@@ -28,17 +30,23 @@ public class RecipeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_list_view);
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
-
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
-                "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
-                "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+        if(recipes.size() == 0){
+            String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
+                    "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
+                    "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+            for (int i = 0; i < values.length; ++i) {
+                Recipe r = new Recipe(values[i], 30, 2);
+                recipes.put(r.id, r);
+            }
+
+        }
 
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
-        for (int i = 0; i < values.length; ++i) {
-            Recipe r = new Recipe(values[i], 30, 2);
-            list2.add(r);
-            recipes.put(r.id, r);
+        Iterator it = recipes.entrySet().iterator();
+        while(it.hasNext()){
+            list2.add((Recipe) ((HashMap.Entry) it.next()).getValue());
+
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 R.layout.recipe_listview_item, list2);
@@ -90,7 +98,12 @@ public class RecipeListActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.action_add){
 
+            Intent myIntent = new Intent(RecipeListActivity.this, RecipeCreateActivity.class);
+            startActivity(myIntent);
+
+        }
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
@@ -123,6 +136,17 @@ public class RecipeListActivity extends AppCompatActivity {
             // change the icon for Windows and iPhone
             String time = recipes.get(position).minutes + "minutes";
             ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float)recipes.get(position).rating);
+            if(recipes.get(position).favorite){
+
+                rowView.findViewById(R.id.favorited).setVisibility(ImageView.VISIBLE);
+                rowView.findViewById(R.id.notfavorited).setVisibility(ImageView.GONE);
+            }
+            else{
+
+                rowView.findViewById(R.id.favorited).setVisibility(ImageView.GONE);
+                rowView.findViewById(R.id.notfavorited).setVisibility(ImageView.VISIBLE);
+
+            }
 
             return rowView;
         }
