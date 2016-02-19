@@ -75,6 +75,7 @@ public class Recipe {//extends SQLiteOpenHelper{
 
     public Recipe () {
 
+        this.id = _id++;
     }
     public Recipe (String name, int minutes, int rating) {
         this.name = name;

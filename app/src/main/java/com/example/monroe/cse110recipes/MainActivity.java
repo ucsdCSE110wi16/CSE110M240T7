@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
 //        final ActionBar ab = getSupportActionBar();
-        Log.d("tag", "hii");
 
 
         ImageView i = (ImageView)findViewById(R.id.img1);

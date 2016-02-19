@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,9 @@ public class RecipeListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
+    }
+
+    private void populateList(){
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
         final ListView listview = (ListView) findViewById(R.id.listview);
@@ -83,6 +87,32 @@ public class RecipeListActivity extends AppCompatActivity {
             }
 
         });
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d("tag", "on resume");
+//        finish();
+//        startActivity(getIntent());
+
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.d("tag", "on restart");
+//        finish();
+//        startActivity(getIntent());
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d("tag", "on start");
+        populateList();
+//        finish();
+//        startActivity(getIntent());
+
     }
 
     @Override
@@ -135,7 +165,9 @@ public class RecipeListActivity extends AppCompatActivity {
             textView.setText(recipes.get(position).name);
             // change the icon for Windows and iPhone
             String time = recipes.get(position).minutes + "minutes";
-            ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float)recipes.get(position).rating);
+            timeView.setText(time);
+
+            ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float) recipes.get(position).rating);
             if(recipes.get(position).favorite){
 
                 rowView.findViewById(R.id.favorited).setVisibility(ImageView.VISIBLE);

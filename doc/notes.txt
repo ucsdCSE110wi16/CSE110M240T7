@@ -1,4 +1,3 @@
-on open, three buttons: search by ingredients, search by recipe, and favorits
-make recipe view sizzle with fun
-make ness the app icon
- 
+Recipe edit
+show only favorites
+Actual recipe view stuff

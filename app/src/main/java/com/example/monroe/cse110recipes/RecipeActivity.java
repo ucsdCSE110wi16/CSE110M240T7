@@ -1,6 +1,9 @@
 package com.example.monroe.cse110recipes;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -35,6 +38,29 @@ public class RecipeActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
 
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
+    }
+
+    private void deleteRecipe(){
+        RecipeListActivity.recipes.remove(currentRecipe.id);
+        finish();
+    }
+
+    private void confirmDelete(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Deleting Recipe")
+                .setMessage("Are you sure you want to delete this recipe?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteRecipe();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+
     }
 
     @Override
@@ -77,6 +103,16 @@ public class RecipeActivity extends AppCompatActivity {
             mOptionsMenu.findItem(R.id.action_favorited).setVisible(true);
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(false);
             currentRecipe.favorite = true;
+        }
+        else if (id == R.id.action_delete) {
+
+            confirmDelete();
+        }
+        else if (id == R.id.action_edit) {
+            Intent myIntent = new Intent(RecipeActivity.this, RecipeCreateActivity.class);
+            myIntent.putExtra("recipeID", currentRecipe.id); //Optional parameters
+            Log.d("tag","settinga recipeID: "+currentRecipe.id);
+            startActivity(myIntent);
         }
         Log.d("tag", currentRecipe.favorite?"favorited":"not");
         Log.d("tag", RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID")).favorite?"favorited":"not");
