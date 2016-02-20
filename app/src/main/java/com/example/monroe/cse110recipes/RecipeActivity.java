@@ -1,11 +1,17 @@
 package com.example.monroe.cse110recipes;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -34,7 +40,15 @@ public class RecipeActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
 
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
+        String[] itemList = new String[] {"Pour cereal in bowl first", "Pour Milk in bowl"};
+        ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
+        ListView stepsListView = (ListView) findViewById(R.id.StartHere);
+        stepsListView.setAdapter(instructionsAdapter);
+
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
