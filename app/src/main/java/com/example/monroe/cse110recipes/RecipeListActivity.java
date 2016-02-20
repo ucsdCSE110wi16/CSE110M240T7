@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class RecipeListActivity extends AppCompatActivity {
@@ -26,19 +29,28 @@ public class RecipeListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
+    }
+
+    private void populateList(){
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
-
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
-                "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
-                "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+        if(recipes.size() == 0){
+            String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
+                    "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
+                    "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+            for (int i = 0; i < values.length; ++i) {
+                Recipe r = new Recipe(values[i], 30, 2);
+                recipes.put(r.id, r);
+            }
+
+        }
 
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
-        for (int i = 0; i < values.length; ++i) {
-            Recipe r = new Recipe(values[i], 30, 2);
-            list2.add(r);
-            recipes.put(r.id, r);
+        Iterator it = recipes.entrySet().iterator();
+        while(it.hasNext()){
+            list2.add((Recipe) ((HashMap.Entry) it.next()).getValue());
+
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 R.layout.recipe_listview_item, list2);
@@ -75,6 +87,32 @@ public class RecipeListActivity extends AppCompatActivity {
             }
 
         });
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.d("tag", "on resume");
+//        finish();
+//        startActivity(getIntent());
+
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.d("tag", "on restart");
+//        finish();
+//        startActivity(getIntent());
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d("tag", "on start");
+        populateList();
+//        finish();
+//        startActivity(getIntent());
+
     }
 
     @Override
@@ -90,7 +128,12 @@ public class RecipeListActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.action_add){
 
+            Intent myIntent = new Intent(RecipeListActivity.this, RecipeCreateActivity.class);
+            startActivity(myIntent);
+
+        }
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
@@ -122,7 +165,20 @@ public class RecipeListActivity extends AppCompatActivity {
             textView.setText(recipes.get(position).name);
             // change the icon for Windows and iPhone
             String time = recipes.get(position).minutes + "minutes";
-            ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float)recipes.get(position).rating);
+            timeView.setText(time);
+
+            ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float) recipes.get(position).rating);
+            if(recipes.get(position).favorite){
+
+                rowView.findViewById(R.id.favorited).setVisibility(ImageView.VISIBLE);
+                rowView.findViewById(R.id.notfavorited).setVisibility(ImageView.GONE);
+            }
+            else{
+
+                rowView.findViewById(R.id.favorited).setVisibility(ImageView.GONE);
+                rowView.findViewById(R.id.notfavorited).setVisibility(ImageView.VISIBLE);
+
+            }
 
             return rowView;
         }
