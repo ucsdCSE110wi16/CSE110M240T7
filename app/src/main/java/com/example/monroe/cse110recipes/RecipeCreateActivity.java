@@ -75,6 +75,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         r.rating = (int)vratingBar.getRating();
         Log.d("tag","num stars: "+((RatingBar)findViewById(R.id.edit_rating)).getRating());
         RecipeListActivity.recipes.put(r.id,r);
+        //r.saveRecipe();
         finish();
     }
 
