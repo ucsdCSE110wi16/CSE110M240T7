@@ -1,13 +1,21 @@
 package com.example.monroe.cse110recipes;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.provider.Settings;
+
 /**
  * Created by monroe on 1/31/2016.
  * edited by Cliff on 2/1/2016
@@ -103,6 +111,7 @@ public class Recipe {//extends SQLiteOpenHelper{
     int[] timePerStep; //time that each step takes, indexed the same as steps[]
     
     //Serialize and save a file on an android device
+    /*
     public void saveRecipe(Context context) {
     	try {
             FileOutputStream fos = context.openFileOutput(name, Context.MODE_PRIVATE);
@@ -113,9 +122,59 @@ public class Recipe {//extends SQLiteOpenHelper{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+    public void saveRecipe() {
+        FileOutputStream outStream = null;
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), name);
+            outStream = new FileOutputStream(f);
+            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
+
+            objectOutStream.writeObject(this);
+            objectOutStream.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Recipe loadRecipe() {
+        Recipe r = null;
+        FileInputStream inStream = null;
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), name);
+            inStream = new FileInputStream(f);
+            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
+
+            r = (Recipe) objectInStream.readObject();
+            objectInStream.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (OptionalDataException e) {
+            e.printStackTrace();
+        }
+        catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (r != null) {
+            return r;
+        }
+        return this;
     }
     
     //retrieve a serialized file from an android device
+    /*
     public Recipe loadRecipe(Context context)  {
         Recipe recipe = null;
         try {
@@ -130,7 +189,7 @@ public class Recipe {//extends SQLiteOpenHelper{
             e.printStackTrace();
         }
         return recipe;
-    } /*
+    }*/ /*
     @Override
     public void onCreate(SQLiteDatabase db) {
 

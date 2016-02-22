@@ -3,7 +3,6 @@ package com.example.monroe.cse110recipes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageView i = (ImageView)findViewById(R.id.img1);
-        i.setBackgroundResource(R.drawable.ness);
         //i.setBackgroundResource(R.drawable.gif);
 
 //        AnimationDrawable pro = (AnimationDrawable)i.getBackground();

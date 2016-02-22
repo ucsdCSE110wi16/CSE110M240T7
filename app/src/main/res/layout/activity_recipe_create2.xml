@@ -75,19 +75,23 @@
             android:text="Ingredients:" android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/ingredient_add"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_add_ness_blue_24dp"/>
+            android:background="@drawable/ic_add_ness_blue_24dp"
+            android:nestedScrollingEnabled="true" />
     </LinearLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:background="#7171F2" />
     <LinearLayout
+        android:id="@+id/ingredient_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <include layout="@layout/ingredients_fields"></include>
+        <!--<include layout="@layout/ingredients_fields"></include>-->
+        <include layout="@layout/ingredients_fields2"></include>
         <include layout="@layout/ingredients_fields2"></include>
     </LinearLayout>
 
