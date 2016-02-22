@@ -44,13 +44,19 @@ public class RecipeActivity extends AppCompatActivity {
         Recipe r = RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         currentRecipe = r;
         Log.d("tag", currentRecipe.favorite?"favorited":"not");
+        //Populate with Recipie's name
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
-
+        //Populate the total cook time
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
-        String[] itemList = new String[] {"Pour cereal in bowl first", "Pour Milk in bowl"};
+
+        String[] itemList = {"Pour cereal in bowl first", "Pour Milk in bowl"};
+        //Instantiate ArrayAdapter
         ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
+        //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
+
+        instructionsAdapter.add("item 3");
 
     }
 
