@@ -93,3 +93,12 @@
  - I want to delete a selected recipe
  - So that I do not view an unwanted recipe
  - time: 1 week
+
+14. Select step --NOT STARTED--
+ - As a user
+ - Given that I selected a recipe
+ - When I select a step
+ - I want to redirect to a page
+ - So I can view all the details of the step
+ - And possibly start a timer
+ - time: 1 week?
