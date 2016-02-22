@@ -1,11 +1,14 @@
 package com.example.monroe.cse110recipes;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 public class RecipeCreateActivity extends AppCompatActivity {
@@ -13,12 +16,21 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private EditText veditTitle;
     private EditText veditTime;
     private RatingBar vratingBar;
+    private ImageView vingredientAddButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_create2);
         setupViewFields();
+        vingredientAddButton.setOnClickListener(new ImageView.OnClickListener() {
+            public void onClick(View v) {
+                ((LinearLayout)findViewById(R.id.ingredient_container)).addView(
+                        getLayoutInflater().inflate((R.layout.ingredients_fields2), null)
+                );
+            }
+        });
         Log.d("tag: ", "veditTitle: " + veditTitle);
         Log.d("tag: ", "veditTime: " + veditTime);
         Log.d("tag: ", "vratingBar: " + vratingBar);
@@ -33,12 +45,15 @@ public class RecipeCreateActivity extends AppCompatActivity {
         veditTitle = ((EditText)findViewById(R.id.edit_title));
         veditTime = ((EditText) findViewById(R.id.edit_time));
         vratingBar = ((RatingBar)findViewById(R.id.edit_rating));
+        vingredientAddButton = ((ImageView)findViewById(R.id.ingredient_add));
     }
     private void setCurrentRecipe(Recipe r){
         veditTitle.setText(r.name);
         veditTime.setText(r.minutes + "");
         vratingBar.setRating((float)r.rating);
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

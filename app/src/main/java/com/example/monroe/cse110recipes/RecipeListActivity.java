@@ -10,11 +10,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,11 +29,33 @@ import java.util.List;
 
 public class RecipeListActivity extends AppCompatActivity {
     public static HashMap<Integer, Recipe> recipes = new HashMap<Integer, Recipe>();
+    public boolean filterShown = false;
+    public Animation slideDownAnimation;
+    public Animation slideUpAnimation;
+    public String filterRecipeName = "";
+    public boolean filterFavorites = false;
+    public String filterIngredients = "";
+    public StableArrayAdapter mArrayAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
+        String filterType = getIntent().getStringExtra("filterType");
+        if(filterType.equals(MainActivity.FilterTypeFavorites)){
+            filterFavorites = true;
+        }
+        else if(filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)){
+            showFilters();
+        }
+        findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Log.d("tag", "in here");
+                filterClick();
+            }
+        });
+        slideDownAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+        slideUpAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
     }
 
     private void populateList(){
@@ -52,7 +79,7 @@ public class RecipeListActivity extends AppCompatActivity {
             list2.add((Recipe) ((HashMap.Entry) it.next()).getValue());
 
         }
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+        final StableArrayAdapter adapter = mArrayAdapter = new StableArrayAdapter(this,
                 R.layout.recipe_listview_item, list2);
         listview.setAdapter(adapter);
 
@@ -134,6 +161,15 @@ public class RecipeListActivity extends AppCompatActivity {
             startActivity(myIntent);
 
         }
+        else if(id==R.id.action_filter){
+            if(filterShown){
+                hideFilters();
+            }
+            else{
+                showFilters();
+            }
+
+        }
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            return true;
@@ -142,21 +178,41 @@ public class RecipeListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showFilters(){
+        View recipeView = findViewById(R.id.recipe_filter);
+        //recipeView.startAnimation(slideUpAnimation);
+        recipeView.setVisibility(View.VISIBLE);
+        filterShown = true;
+
+    }
+    public void hideFilters(){
+        View recipeView = findViewById(R.id.recipe_filter);
+        //recipeView.startAnimation(slideDownAnimation);
+        recipeView.setVisibility(View.GONE);
+        filterShown = false;
+
+    }
+
     private class StableArrayAdapter extends ArrayAdapter<Recipe> {
 
+        private List<Recipe>originalData = null;
+        private List<Recipe>filteredData = null;
         HashMap<Recipe, Integer> mIdMap = new HashMap<Recipe, Integer>();
         List<Recipe> recipes;
         Context context;
+        private ItemFilter mFilter = new ItemFilter();
 
         public StableArrayAdapter(Context context, int textViewResourceId,
                                   List<Recipe> objects) {
             super(context, textViewResourceId, objects);
             recipes = objects;
+            originalData = filteredData = objects;
             this.context = context;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            List<Recipe> recipes = filteredData;
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View rowView = inflater.inflate(R.layout.recipe_listview_item, parent, false);
@@ -189,10 +245,69 @@ public class RecipeListActivity extends AppCompatActivity {
             return item.id;
         }
 
+
         @Override
         public boolean hasStableIds() {
             return true;
         }
 
+        private class ItemFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                String filterString = constraint.toString().toLowerCase();
+
+                FilterResults results = new FilterResults();
+
+                final List<Recipe> list = originalData;
+
+                int count = list.size();
+                final ArrayList<Recipe> nlist = new ArrayList<Recipe>(count);
+
+                Recipe filterableRecipe ;
+
+                for (int i = 0; i < count; i++) {
+                    filterableRecipe = list.get(i);
+                    Log.d("tag", "recipe: "+i);
+                    if(filterFavorites && !filterableRecipe.favorite){
+                        continue;
+                    }
+                    if(!filterRecipeName.isEmpty() && !filterableRecipe.name.contains(filterRecipeName.toLowerCase().trim())){
+                        continue;
+                    }
+                    //TODO
+                    if(!filterIngredients.isEmpty()){
+                        String[] ingredients = filterIngredients.split(",");
+                        for(String ing : ingredients){
+                        }
+                    }
+                    nlist.add(filterableRecipe);
+                }
+
+                results.values = nlist;
+                results.count = nlist.size();
+
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredData = (ArrayList<Recipe>) results.values;
+                notifyDataSetChanged();
+            }
+
+            public Filter getFilter() {
+                return mFilter;
+            }
+
+        }
+
+    }
+    public void filterClick(){
+        Log.d("tag", "in here 1");
+        filterFavorites = ((Switch)findViewById(R.id.filter_favorites)).isChecked();
+        filterRecipeName = ((EditText)findViewById(R.id.filter_recipe_name)).getText().toString();
+        mArrayAdapter.getFilter().filter("");
     }
 }
