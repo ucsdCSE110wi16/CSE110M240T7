@@ -71,7 +71,8 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
         }
         r.name = veditTitle.getText().toString();
-        r.minutes = Integer.parseInt(veditTime.getText().toString());
+        String minutesText = veditTime.getText().toString();
+        if(!minutesText.isEmpty())r.minutes = Integer.parseInt(minutesText);
         r.rating = (int)vratingBar.getRating();
         Log.d("tag","num stars: "+((RatingBar)findViewById(R.id.edit_rating)).getRating());
         RecipeListActivity.recipes.put(r.id,r);
