@@ -24,7 +24,6 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:id="@+id/edit_title"/>
@@ -44,7 +43,6 @@
         android:id="@+id/edit_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:layout_marginLeft="10dp"/>
 
 

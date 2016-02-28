@@ -26,7 +26,6 @@
             <EditText
                 android:layout_width="379dp"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:id="@+id/editText2"
                 android:text="Cardiac Arrest 101" />
 
@@ -41,7 +40,6 @@
                 android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
-                android:singleLine="true"
                 android:ems="10"
                 android:id="@+id/editText" />
 
@@ -68,7 +66,6 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/editText4"
@@ -88,7 +85,6 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:singleLine="true"
                 android:id="@+id/editText3" />
 
             <TextView
