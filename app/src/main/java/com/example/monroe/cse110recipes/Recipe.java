@@ -1,20 +1,23 @@
 package com.example.monroe.cse110recipes;
 
+import android.os.Environment;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
-import android.provider.Settings;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Created by monroe on 1/31/2016.
@@ -24,6 +27,7 @@ public class Recipe {//extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "Recipe_Database";
     private static final int DATABASE_VERSION = 1;
     public static final String COLUMN_ID = "_id";
+    public static final String RECIPE_NAMES_FILE_NAME = "__RECIPES";
     public static String strSeparator = "_,_";
 
 
@@ -123,6 +127,55 @@ public class Recipe {//extends SQLiteOpenHelper{
             e.printStackTrace();
         }
     }*/
+    public static ArrayList<Recipe> readRecipes(){
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            int count = Integer.parseInt(br.readLine());
+            for(int i=0;i<count;i++){
+                String recipeName = br.readLine();
+                recipes.add(loadRecipe(recipeName));
+            }
+            br.close();
+            return recipes;
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+    public static void saveRecipes(Collection<Recipe>recipes){
+        FileOutputStream outStream = null;
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+
+            int count = recipes.size();
+            bw.write(Integer.toString(count));
+            bw.newLine();
+            Iterator<Recipe> iter = recipes.iterator();
+            while(iter.hasNext()){
+                Recipe r = iter.next();
+                bw.write(r.name);
+                bw.newLine();
+                r.saveRecipe();
+            }
+            bw.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void saveRecipe() {
         FileOutputStream outStream = null;
         try {
@@ -139,6 +192,35 @@ public class Recipe {//extends SQLiteOpenHelper{
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Recipe loadRecipe(String name) {
+        Recipe r = null;
+        FileInputStream inStream = null;
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), name);
+            inStream = new FileInputStream(f);
+            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
+
+            r = (Recipe) objectInStream.readObject();
+            objectInStream.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (OptionalDataException e) {
+            e.printStackTrace();
+        }
+        catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return r;
     }
 
     public Recipe loadRecipe() {

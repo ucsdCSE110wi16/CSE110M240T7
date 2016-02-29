@@ -15,6 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:singleLine="true"
         android:id="@+id/edit_ingredient_title"
         android:layout_weight="0.5"/>
 
@@ -31,6 +32,7 @@
 
     <EditText
         android:hint="amt"
+        android:singleLine="true"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/edit_ingredient_amt"

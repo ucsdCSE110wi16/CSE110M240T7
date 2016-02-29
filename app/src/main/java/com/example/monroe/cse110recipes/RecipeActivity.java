@@ -1,23 +1,16 @@
 package com.example.monroe.cse110recipes;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -55,6 +48,16 @@ public class RecipeActivity extends AppCompatActivity {
         //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
+
+        String[] instructionTime ={"1 minute","20 minutes"};
+        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps,instructionTime);
+        ListView timerListView = (ListView) findViewById(R.id.timesHere);
+        timerListView.setAdapter(timerAdapter);
+
+
+
+
+
 
     }
 

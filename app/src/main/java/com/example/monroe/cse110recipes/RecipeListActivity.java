@@ -11,11 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -36,12 +36,15 @@ public class RecipeListActivity extends AppCompatActivity {
     public boolean filterFavorites = false;
     public String filterIngredients = "";
     public StableArrayAdapter mArrayAdapter = null;
-    String filterType = null;
+    //String filterType = null;
+
+    public String filterType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
+
         if(filterType == null)filterType = getIntent().getStringExtra("filterType");
         if(filterType.equals(MainActivity.FilterTypeFavorites)){
             filterFavorites = true;
@@ -49,14 +52,21 @@ public class RecipeListActivity extends AppCompatActivity {
         else if(filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)){
             showFilters();
         }
+
+        ((ListView) findViewById(R.id.listview)).setEmptyView(findViewById(R.id.emptyRecipes));
+
         findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Log.d("tag", "in here");
                 filterClick();
             }
         });
-        slideDownAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
-        slideUpAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+    }
+
+    private void setFilterFavorites(Boolean val){
+        ((Switch)findViewById(R.id.filter_favorites)).setChecked(val);
+        filterFavorites = val;
+
     }
 
     private void populateList(){
@@ -138,6 +148,17 @@ public class RecipeListActivity extends AppCompatActivity {
         super.onStart();
         Log.d("tag", "on start");
         populateList();
+        if(filterType == null){
+            filterType = getIntent().getStringExtra("filterType");
+        }
+        if(filterType != null) {
+            if (filterType.equals(MainActivity.FilterTypeFavorites)) {
+                setFilterFavorites(true);
+                mArrayAdapter.getFilter().filter("");
+            } else if (filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)) {
+                showFilters();
+            }
+        }
 //        finish();
 //        startActivity(getIntent());
 
@@ -194,7 +215,7 @@ public class RecipeListActivity extends AppCompatActivity {
 
     }
 
-    private class StableArrayAdapter extends ArrayAdapter<Recipe> {
+    private class StableArrayAdapter extends ArrayAdapter<Recipe> implements Filterable{
 
         private List<Recipe>originalData = null;
         private List<Recipe>filteredData = null;
@@ -241,11 +262,20 @@ public class RecipeListActivity extends AppCompatActivity {
         }
 
         @Override
+        public int getCount() {
+            return filteredData.size();
+        }
+
+        @Override
         public long getItemId(int position) {
             Recipe item = getItem(position);
             return item.id;
         }
 
+        @Override
+        public Filter getFilter(){
+            return mFilter;
+        }
 
         @Override
         public boolean hasStableIds() {
@@ -273,7 +303,7 @@ public class RecipeListActivity extends AppCompatActivity {
                     if(filterFavorites && !filterableRecipe.favorite){
                         continue;
                     }
-                    if(!filterRecipeName.isEmpty() && !filterableRecipe.name.contains(filterRecipeName.toLowerCase().trim())){
+                    if(!filterRecipeName.isEmpty() && !filterableRecipe.name.toLowerCase().trim().contains(filterRecipeName.toLowerCase().trim())){
                         continue;
                     }
                     //TODO
