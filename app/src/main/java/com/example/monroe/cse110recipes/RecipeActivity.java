@@ -49,7 +49,15 @@ public class RecipeActivity extends AppCompatActivity {
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
-//        instructionsAdapter.add("item 3");
+        String[] instructionTime ={"1 minute","20 minutes"};
+        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps,instructionTime);
+        ListView timerListView = (ListView) findViewById(R.id.timesHere);
+        timerListView.setAdapter(timerAdapter);
+
+
+
+
+
 
     }
 

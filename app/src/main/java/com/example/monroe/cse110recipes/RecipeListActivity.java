@@ -36,13 +36,25 @@ public class RecipeListActivity extends AppCompatActivity {
     public boolean filterFavorites = false;
     public String filterIngredients = "";
     public StableArrayAdapter mArrayAdapter = null;
+    //String filterType = null;
+
     public String filterType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
+
+        if(filterType == null)filterType = getIntent().getStringExtra("filterType");
+        if(filterType.equals(MainActivity.FilterTypeFavorites)){
+            filterFavorites = true;
+        }
+        else if(filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)){
+            showFilters();
+        }
+
         ((ListView) findViewById(R.id.listview)).setEmptyView(findViewById(R.id.emptyRecipes));
+
         findViewById(R.id.filter_button).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Log.d("tag", "in here");
