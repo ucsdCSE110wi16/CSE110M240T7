@@ -17,8 +17,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private EditText veditTime;
     private RatingBar vratingBar;
     private ImageView vingredientAddButton;
+    private LinearLayout vingredientContainer;
 
 
+    public void ingredientRemoveClick(View v){
+        vingredientContainer.removeView((LinearLayout)v.getParent());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +30,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
         setupViewFields();
         vingredientAddButton.setOnClickListener(new ImageView.OnClickListener() {
             public void onClick(View v) {
-                ((LinearLayout)findViewById(R.id.ingredient_container)).addView(
-                        getLayoutInflater().inflate((R.layout.ingredients_fields2), null)
-                );
+                View ingredient = getLayoutInflater().inflate((R.layout.ingredients_fields2), null);
+                ingredient.findViewById(R.id.ingredient_remove).setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View v){
+                        ingredientRemoveClick(v);
+                    }
+
+                });
+                ((LinearLayout)findViewById(R.id.ingredient_container)).addView(ingredient);
             }
         });
         Log.d("tag: ", "veditTitle: " + veditTitle);
@@ -46,6 +55,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         veditTime = ((EditText) findViewById(R.id.edit_time));
         vratingBar = ((RatingBar)findViewById(R.id.edit_rating));
         vingredientAddButton = ((ImageView)findViewById(R.id.ingredient_add));
+        vingredientContainer = ((LinearLayout)findViewById(R.id.ingredient_container));
     }
     private void setCurrentRecipe(Recipe r){
         veditTitle.setText(r.name);

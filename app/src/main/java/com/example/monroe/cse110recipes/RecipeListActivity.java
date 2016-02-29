@@ -230,7 +230,7 @@ public class RecipeListActivity extends AppCompatActivity {
             TextView timeView = (TextView) rowView.findViewById(R.id.recipeTime);
             textView.setText(recipes.get(position).name);
             // change the icon for Windows and iPhone
-            String time = recipes.get(position).minutes + "minutes";
+            String time = recipes.get(position).minutes + " minutes";
             timeView.setText(time);
 
             ((RatingBar) rowView.findViewById(R.id.recipeRating)).setRating((float) recipes.get(position).rating);
