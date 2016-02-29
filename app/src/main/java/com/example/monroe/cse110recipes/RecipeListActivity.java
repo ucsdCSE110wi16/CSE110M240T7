@@ -36,12 +36,13 @@ public class RecipeListActivity extends AppCompatActivity {
     public boolean filterFavorites = false;
     public String filterIngredients = "";
     public StableArrayAdapter mArrayAdapter = null;
+    String filterType = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
-        String filterType = getIntent().getStringExtra("filterType");
+        if(filterType == null)filterType = getIntent().getStringExtra("filterType");
         if(filterType.equals(MainActivity.FilterTypeFavorites)){
             filterFavorites = true;
         }

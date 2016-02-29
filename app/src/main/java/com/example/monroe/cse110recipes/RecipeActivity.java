@@ -56,8 +56,6 @@ public class RecipeActivity extends AppCompatActivity {
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
-        instructionsAdapter.add("item 3");
-
     }
 
 
