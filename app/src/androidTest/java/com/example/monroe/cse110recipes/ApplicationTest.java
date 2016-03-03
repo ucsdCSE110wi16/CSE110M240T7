@@ -31,8 +31,31 @@ public class ApplicationTest {
         nextActivity.finish();
     }
 
+    @Test
+    public void testCreateRecipe() {
 
-    /*public void testSearchByIngredientsClick(){
+        ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeCreateActivity.class.getName(), null, false);
+        onView(withId(R.id.button3)).perform(click());
+        onView(withId(R.id.action_add)).perform(click());
+        RecipeCreateActivity nextActivity = (RecipeCreateActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+        assertNotNull(nextActivity);
+        nextActivity.finish();
+    }
+/*
+    @Test
+    public void testFilterSearchByRecipe(){
+
+        onView(withId(R.id.button3)).perform(click());
+        onView(withId(R.id.action_add)).perform(click());
+        onView(withId(R.id.edit_title)).perform(typeText("shit")), closeSoftKeyboard());
+        onView(withId(R.id.edit_time)).perform(typeText("10"),closeSoftKeyboard());
+        onView(withId(R.id.edit_rating).perform(click))
+
+    }
+*/
+/*
+    @Test
+    public void testSearchByIngredientsClick(){
 
         ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeListActivity.class.getName(), null, false);
         onView(withId(R.id.button3)).perform(click());
