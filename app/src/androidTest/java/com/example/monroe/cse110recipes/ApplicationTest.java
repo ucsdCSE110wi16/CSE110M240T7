@@ -4,6 +4,10 @@ import android.app.Instrumentation.ActivityMonitor;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.monroe.cse110recipes.recipes.Recipe;
+import com.example.monroe.cse110recipes.recipes.RecipeCreateActivity;
+import com.example.monroe.cse110recipes.recipes.RecipeListActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

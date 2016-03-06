@@ -1,6 +1,7 @@
 package com.example.monroe.cse110recipes;
 
 import com.example.monroe.cse110recipes.datastructure.NSTNode;
+import com.example.monroe.cse110recipes.recipes.Recipe;
 
 import java.util.ArrayList;
 import java.util.Collections;
