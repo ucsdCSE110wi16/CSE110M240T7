@@ -150,7 +150,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
     public static void ensureRecipesFolderExists(){
         File f = new File(Environment.getExternalStorageDirectory(), RECIPE_FOLDER_NAME);
         try{
-            f.mkdir();
+            f.mkdirs();
 
         }
         catch (Exception e) {
@@ -162,6 +162,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
         try {
             File f = new File(Environment.getExternalStorageDirectory(), RECIPE_FOLDER_NAME);
+            f.mkdirs();
             for(File recipeFile : f.listFiles()){
                 Log.d("recipe file name:",recipeFile.getName());
                 recipes.add(loadRecipe(recipeFile.getName()));
@@ -189,7 +190,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
 //        }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return recipes;
         }
 
 
@@ -252,6 +253,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
         FileOutputStream outStream = null;
         try {
             File f = new File(new File(Environment.getExternalStorageDirectory(),RECIPE_FOLDER_NAME), name);
+            f.createNewFile();
             outStream = new FileOutputStream(f);
             ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
 
