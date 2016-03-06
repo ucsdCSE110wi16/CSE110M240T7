@@ -1,3 +1,5 @@
+import com.example.monroe.cse110recipes.Recipe;
+
 import java.util.ArrayList;
 
 /**
