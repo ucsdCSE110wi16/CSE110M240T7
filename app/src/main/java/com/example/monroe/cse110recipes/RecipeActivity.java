@@ -65,6 +65,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     private void deleteRecipe(){
         RecipeListActivity.recipes.remove(currentRecipe.id);
+        currentRecipe.delete();
         finish();
     }
 
