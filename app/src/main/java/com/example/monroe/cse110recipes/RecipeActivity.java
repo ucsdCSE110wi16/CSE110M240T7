@@ -120,12 +120,14 @@ public class RecipeActivity extends AppCompatActivity {
             mOptionsMenu.findItem(R.id.action_favorited).setVisible(false);
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(true);
             currentRecipe.favorite = false;
+            currentRecipe.saveRecipe();
         }
         else if (id == R.id.action_notfavorited) {
 
             mOptionsMenu.findItem(R.id.action_favorited).setVisible(true);
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(false);
             currentRecipe.favorite = true;
+            currentRecipe.saveRecipe();
         }
         else if (id == R.id.action_delete) {
 
