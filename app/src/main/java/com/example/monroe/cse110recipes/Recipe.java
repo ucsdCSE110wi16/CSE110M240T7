@@ -1,6 +1,7 @@
 package com.example.monroe.cse110recipes;
 
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,7 +30,9 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
     public static final String COLUMN_ID = "_id";
     public static final String RECIPE_NAMES_FILE_NAME = "__RECIPES";
+    public static final String RECIPE_FOLDER_NAME = "RECIPES";
     public static String strSeparator = "_,_";
+    static final long serialVersionUID = -687991492884005033L;
 
 
     String name; //recipe name
@@ -144,7 +147,54 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
         }
 
     }
+    public static void ensureRecipesFolderExists(){
+        File f = new File(Environment.getExternalStorageDirectory(), RECIPE_FOLDER_NAME);
+        try{
+            f.mkdir();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     public static ArrayList<Recipe> readRecipes(){
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        try {
+            File f = new File(Environment.getExternalStorageDirectory(), RECIPE_FOLDER_NAME);
+            for(File recipeFile : f.listFiles()){
+                Log.d("recipe file name:",recipeFile.getName());
+                recipes.add(loadRecipe(recipeFile.getName()));
+            }
+
+            return recipes;
+//            BufferedReader br = new BufferedReader(new FileReader(f));
+//            String line;
+//            while((line = br.readLine()) != null){
+////                int count = Integer.parseInt(line);
+//                String recipeName = line;
+//                recipes.add(loadRecipe(recipeName));
+//
+//            }
+//            br.close();
+//            return recipes;
+        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+    public static ArrayList<Recipe> readRecipesOLD(){
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
         try {
             File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
@@ -201,6 +251,23 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
     public void saveRecipe() {
         FileOutputStream outStream = null;
         try {
+            File f = new File(new File(Environment.getExternalStorageDirectory(),RECIPE_FOLDER_NAME), name);
+            outStream = new FileOutputStream(f);
+            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
+
+            objectOutStream.writeObject(this);
+            objectOutStream.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveRecipeOLD() {
+        FileOutputStream outStream = null;
+        try {
             File f = new File(Environment.getExternalStorageDirectory(), name);
             outStream = new FileOutputStream(f);
             ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
@@ -223,11 +290,23 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
         }
     }
 
+    public void delete() {
+        try {
+//            File f = new File(Environment.getExternalStorageDirectory(), name);
+            File f = new File(new File(Environment.getExternalStorageDirectory(), RECIPE_FOLDER_NAME), this.getName());
+            f.delete();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Recipe loadRecipe(String name) {
         Recipe r = null;
         FileInputStream inStream = null;
         try {
-            File f = new File(Environment.getExternalStorageDirectory(), name);
+//            File f = new File(Environment.getExternalStorageDirectory(), name);
+            File f = new File(new File(Environment.getExternalStorageDirectory(),RECIPE_FOLDER_NAME), name);
             inStream = new FileInputStream(f);
             ObjectInputStream objectInStream = new ObjectInputStream(inStream);
 

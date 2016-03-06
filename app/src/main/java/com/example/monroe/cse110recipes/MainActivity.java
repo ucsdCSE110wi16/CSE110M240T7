@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageView i = (ImageView)findViewById(R.id.img1);
-        Recipe.ensureRecipesFileExists();
+        Recipe.ensureRecipesFolderExists();
         //i.setBackgroundResource(R.drawable.gif);
 
 //        AnimationDrawable pro = (AnimationDrawable)i.getBackground();
