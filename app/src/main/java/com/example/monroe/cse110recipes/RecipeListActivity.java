@@ -83,6 +83,17 @@ public class RecipeListActivity extends AppCompatActivity {
             }
 
         }
+        else {
+            Recipe r = new Recipe();
+            String[] values = new String[]{};
+            ArrayList<Recipe> recipes1 = new ArrayList<Recipe>();
+            recipes1 = r.readRecipes();
+            for (int i = 0; i < recipes1.size(); i++) {
+                r = recipes1.get(i);
+                Recipe r1 = new Recipe(values[i], r.minutes, r.rating);
+                recipes.put(r.id, r);
+            }
+        }
 
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
         Iterator it = recipes.entrySet().iterator();
