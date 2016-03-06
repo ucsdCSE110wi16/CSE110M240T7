@@ -45,12 +45,22 @@ public class RecipeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list_view);
 
+
         if(filterType == null)filterType = getIntent().getStringExtra("filterType");
-        if(filterType.equals(MainActivity.FilterTypeFavorites)){
-            filterFavorites = true;
+        if(filterType == null){
+            if(savedInstanceState != null) filterType = savedInstanceState.getString("filterType");
         }
-        else if(filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)){
-            showFilters();
+        if(filterType != null){
+            if(filterType.equals(MainActivity.FilterTypeFavorites)){
+                filterFavorites = true;
+            }
+            else if(filterType.equals(MainActivity.FilterTypeIngredients) || filterType.equals(MainActivity.FilterTypeRecipe)){
+                showFilters();
+                if(filterType.equals(MainActivity.FilterTypeIngredients)){
+                    ((EditText)findViewById(R.id.filter_ingredients)).requestFocus();
+                }
+            }
+
         }
 
         ((ListView) findViewById(R.id.listview)).setEmptyView(findViewById(R.id.emptyRecipes));
@@ -61,6 +71,11 @@ public class RecipeListActivity extends AppCompatActivity {
                 filterClick();
             }
         });
+    }
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putString("filterType", filterType);
+        // store data in the bundle
     }
 
     private void setFilterFavorites(Boolean val){
@@ -74,14 +89,25 @@ public class RecipeListActivity extends AppCompatActivity {
 //        setSupportActionBar(myToolbar);
         final ListView listview = (ListView) findViewById(R.id.listview);
         if(recipes.size() == 0){
-            String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
-                    "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
-                    "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
-            for (int i = 0; i < values.length; ++i) {
-                Recipe r = new Recipe(values[i], 30, 2);
+//            String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
+//                    "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
+//                    "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+//            for (int i = 0; i < values.length; ++i) {
+//                Recipe r = new Recipe(values[i], 30, 2);
+//                recipes.put(r.id, r);
+//            }
+            Recipe r = new Recipe();
+            String[] values = new String[]{};
+            ArrayList<Recipe> recipes1 = new ArrayList<Recipe>();
+            recipes1 = r.readRecipes();
+            for (int i = 0; i < recipes1.size(); i++) {
+                r = recipes1.get(i);
+                //Recipe r1 = new Recipe(values[i], r.minutes, r.rating);
                 recipes.put(r.id, r);
             }
 
+        }
+        else {
         }
 
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();

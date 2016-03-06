@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
+import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +24,7 @@ import java.util.Iterator;
  * Created by monroe on 1/31/2016.
  * edited by Cliff on 2/1/2016
  */
-public class Recipe {//extends SQLiteOpenHelper{
+public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "Recipe_Database";
     private static final int DATABASE_VERSION = 1;
     public static final String COLUMN_ID = "_id";
@@ -85,6 +86,10 @@ public class Recipe {//extends SQLiteOpenHelper{
 
     //basic constructor
 
+    public static int getNewId(){
+        return _id++;
+    }
+
     public Recipe () {
 
         this.id = _id++;
@@ -127,15 +132,29 @@ public class Recipe {//extends SQLiteOpenHelper{
             e.printStackTrace();
         }
     }*/
+
+    public static void ensureRecipesFileExists(){
+        File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
+        try{
+            f.createNewFile();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public static ArrayList<Recipe> readRecipes(){
         ArrayList<Recipe> recipes = new ArrayList<Recipe>();
         try {
             File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
             BufferedReader br = new BufferedReader(new FileReader(f));
-            int count = Integer.parseInt(br.readLine());
-            for(int i=0;i<count;i++){
-                String recipeName = br.readLine();
+            String line;
+            while((line = br.readLine()) != null){
+//                int count = Integer.parseInt(line);
+                String recipeName = line;
                 recipes.add(loadRecipe(recipeName));
+
             }
             br.close();
             return recipes;
@@ -152,29 +171,32 @@ public class Recipe {//extends SQLiteOpenHelper{
 
     }
     public static void saveRecipes(Collection<Recipe>recipes){
-        FileOutputStream outStream = null;
-        try {
-            File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 
-            int count = recipes.size();
-            bw.write(Integer.toString(count));
-            bw.newLine();
+
+
+//        FileOutputStream outStream = null;
+//        try {
+//            File f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
+//            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+
+//            int count = recipes.size();
+//            bw.write(Integer.toString(count));
+//            bw.newLine();
             Iterator<Recipe> iter = recipes.iterator();
             while(iter.hasNext()){
                 Recipe r = iter.next();
-                bw.write(r.name);
-                bw.newLine();
+//                bw.write(r.name);
+//                bw.newLine();
                 r.saveRecipe();
             }
-            bw.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+//            bw.close();
+//        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     public void saveRecipe() {
         FileOutputStream outStream = null;
@@ -185,6 +207,13 @@ public class Recipe {//extends SQLiteOpenHelper{
 
             objectOutStream.writeObject(this);
             objectOutStream.close();
+
+            //update recipe names
+            f = new File(Environment.getExternalStorageDirectory(), RECIPE_NAMES_FILE_NAME);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(this.name);
+            bw.newLine();
+            bw.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -203,6 +232,7 @@ public class Recipe {//extends SQLiteOpenHelper{
             ObjectInputStream objectInStream = new ObjectInputStream(inStream);
 
             r = (Recipe) objectInStream.readObject();
+            r.id = Recipe.getNewId();
             objectInStream.close();
         }
         catch (FileNotFoundException e) {

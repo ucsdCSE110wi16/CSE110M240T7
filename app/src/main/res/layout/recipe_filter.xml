@@ -21,6 +21,7 @@
             android:id="@+id/filter_recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:layout_weight="1"/>
     </LinearLayout>
     <Switch
@@ -36,6 +37,7 @@
     <EditText
         android:id="@+id/filter_ingredients"
         android:layout_width="match_parent"
+        android:singleLine="true"
             android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/filter_button"

@@ -49,8 +49,15 @@ public class RecipeActivity extends AppCompatActivity {
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
-        String instructionTime[] = {"1 minute", "20 minutes"};
-        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps,instructionTime);
+        int tempInstructTime[] = {1,2,3};
+        String instructionTime[] = null;
+        for(int i = 0; i < tempInstructTime.length; i++){
+
+            instructionTime[i] = Integer.toString(tempInstructTime[i]) + " minutes";
+
+        }
+
+        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.clickable_row,R.id.stepTime,instructionTime);
         ListView timerListView = (ListView) findViewById(R.id.timesHere);
         timerListView.setAdapter(timerAdapter);
 
@@ -120,12 +127,14 @@ public class RecipeActivity extends AppCompatActivity {
             mOptionsMenu.findItem(R.id.action_favorited).setVisible(false);
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(true);
             currentRecipe.favorite = false;
+            currentRecipe.saveRecipe();
         }
         else if (id == R.id.action_notfavorited) {
 
             mOptionsMenu.findItem(R.id.action_favorited).setVisible(true);
             mOptionsMenu.findItem(R.id.action_notfavorited).setVisible(false);
             currentRecipe.favorite = true;
+            currentRecipe.saveRecipe();
         }
         else if (id == R.id.action_delete) {
 

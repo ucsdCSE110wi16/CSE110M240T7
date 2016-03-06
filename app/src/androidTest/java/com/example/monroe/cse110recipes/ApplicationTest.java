@@ -11,7 +11,9 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
@@ -41,18 +43,59 @@ public class ApplicationTest {
         assertNotNull(nextActivity);
         nextActivity.finish();
     }
+
 /*
-    @Test
-    public void testFilterSearchByRecipe(){
+    public static Matcher<Object> withItemContent(String expectedText) {
+        checkNotNull(expectedText);
+        return withItemContent(equalTo(expectedText));
+    }
 
-        onView(withId(R.id.button3)).perform(click());
-        onView(withId(R.id.action_add)).perform(click());
-        onView(withId(R.id.edit_title)).perform(typeText("shit")), closeSoftKeyboard());
-        onView(withId(R.id.edit_time)).perform(typeText("10"),closeSoftKeyboard());
-        onView(withId(R.id.edit_rating).perform(click))
+    @SuppressWarnings("rawtypes")
+    public static Matcher<Object> withItemContent(final Matcher<String> itemTextMatcher) {
+        checkNotNull(itemTextMatcher);
+        return new BoundedMatcher<Object, IconRow>(IconRow.class) {
+            @Override
+            public boolean matchesSafely(IconRow iconRow) {
+                return itemTextMatcher.matches(iconRow.getText());
+            }
 
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with item content: ");
+                itemTextMatcher.describeTo(description);
+            }
+        };
     }
 */
+
+
+
+
+
+    @Test
+    public void testFilterSearchByRecipe() {
+        ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeCreateActivity.class.getName(), null, false);
+        onView(withId(R.id.button3)).perform(click());
+        onView(withId(R.id.action_add)).perform(click());
+        onView(withId(R.id.edit_title)).perform(click(), typeText("Hello"));
+        onView(withId(R.id.edit_time)).perform(click(), typeText("10"));
+        onView(withId(R.id.edit_rating)).perform(click());
+        onView(withId(R.id.action_save)).perform(click());
+
+        Recipe r = Recipe.loadRecipe("Hello");
+        assertEquals(r.getMinutes(), 10);
+
+    }
+
+   /*     onData("Hello")
+                .inAdapterView(withId(R.id.listview))
+                .atPosition(0);
+    }*/
+
+
+
+
+
 /*
     @Test
     public void testSearchByIngredientsClick(){
@@ -66,4 +109,4 @@ public class ApplicationTest {
     }*/
 
 
-}
+    }
