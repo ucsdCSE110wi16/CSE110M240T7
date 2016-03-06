@@ -1,4 +1,4 @@
-import com.example.monroe.cse110recipes.Recipe;
+import com.example.monroe.cse110recipes.recipes.Recipe;
 
 import java.util.ArrayList;
 
