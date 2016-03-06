@@ -51,7 +51,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="25sp"
             android:text="@string/ingredient_list"
-            android:textColor="#FFF5E509"
+            android:textColor="#FF00"
             android:textStyle="bold"/>
 
         <TextView android:id="@+id/instructions"
