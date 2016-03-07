@@ -2,7 +2,7 @@ Week 9 Tasks:
 fix minor bugs
 filtering by rating
 full ingredient implementation
-UI tweaks (more legible)
+UI tweaks  -- done. changed ingredients from yellow to red
 search by ingredients*
 possibly change buttons on main page*
-load up recipes upon initialization
+load up recipes upon initialization -- need to be fixed
