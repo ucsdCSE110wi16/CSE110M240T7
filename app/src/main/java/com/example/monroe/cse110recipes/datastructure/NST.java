@@ -1,6 +1,6 @@
 package com.example.monroe.cse110recipes.datastructure;
 
-import com.example.monroe.cse110recipes.Recipe;
+import com.example.monroe.cse110recipes.recipes.Recipe;
 
 import java.util.ArrayList;
 import java.util.Collections;
