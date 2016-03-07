@@ -126,8 +126,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <include layout="@layout/instructions_fields"></include>
-        <include layout="@layout/instructions_fields"></include>
 
     </LinearLayout>
 

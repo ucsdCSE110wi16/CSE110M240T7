@@ -137,6 +137,20 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
         }
+        for(int i=0;i<r.steps.size();i++){
+            View step = getLayoutInflater().inflate((R.layout.instructions_fields), null);
+            ((EditText)step.findViewById(R.id.edit_instruction)).setText(r.steps.get(i));
+            ((EditText)step.findViewById(R.id.edit_instructions_time)).setText(r.timePerStep.get(i).toString());
+            step.findViewById(R.id.instructions_remove).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    instructionRemoveClick(v);
+                }
+
+            });
+            ((LinearLayout)findViewById(R.id.instructions_container)).addView(step);
+
+
+        }
     }
 
     /**
@@ -162,6 +176,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         /** FOR EACH INPUTTED INGREDIENT, ADD INGREDIENTS VIA r.ingredients.add(INGREDIENT) **/
 
         ArrayList<View> ingredients = new ArrayList<View>();
+        r.ingredients = new ArrayList<>();
         LinearLayout ingreCont = (LinearLayout)findViewById(R.id.ingredient_container);
         final int childCount = ingreCont.getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -169,10 +184,26 @@ public class RecipeCreateActivity extends AppCompatActivity {
             String name = ((EditText)child.findViewById(R.id.edit_ingredient_title)).getText().toString();
             String metric = ((EditText)child.findViewById(R.id.edit_ingredient_metric)).getText().toString();
             Float amt = null;
-            String amtString = ((EditText)child.findViewById(R.id.edit_ingredient_metric)).getText().toString();
+            String amtString = ((EditText)child.findViewById(R.id.edit_ingredient_amt)).getText().toString();
             if (!amtString.isEmpty()) amt = Float.parseFloat(amtString);
             Ingredient ing = new Ingredient(name, amt, metric);
             r.ingredients.add((ing));
+
+        }
+
+        r.steps = new ArrayList<>();
+        r.timePerStep = new ArrayList<>();
+        ArrayList<View> steps = new ArrayList<View>();
+        LinearLayout stepsCont = (LinearLayout)findViewById(R.id.instructions_container);
+        final int stepsCount = stepsCont.getChildCount();
+        for (int i = 0; i < stepsCount; i++) {
+            final View child = stepsCont.getChildAt(i);
+            String step = ((EditText)child.findViewById(R.id.edit_instruction)).getText().toString();
+            Integer time = 0;
+            String timeString = ((EditText)child.findViewById(R.id.edit_instructions_time)).getText().toString();
+            if (!timeString.isEmpty()) time = Integer.parseInt(timeString);
+            r.timePerStep.add(time);
+            r.steps.add((step));
 
         }
         // SAMPLE CODE

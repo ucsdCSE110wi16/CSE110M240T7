@@ -60,10 +60,14 @@ public class RecipeActivity extends AppCompatActivity {
 
         String[] itemList = {"Add all the wet ingredients to a large bowl", "whisk until smoooth", "Pour Milk in bowl", "Look at bowl", "add dry ingredients to another bowl and set aside"};
 
+        Log.d("steps: ", r.steps.size() + "");
+        Log.d("steps: ", r.timePerStep.size() + "");
+        Log.d("steps: ", r.ingredients.size() + "");
         // list the ingredients name
         ArrayList<String> abc = new ArrayList<String>();
-        for (int i = 0; i < currentRecipe.ingredients.size(); i++) {
-            abc.add(currentRecipe.ingredients.get(i).name);
+        for (int i = 0; i < r.ingredients.size(); i++) {
+            Log.d("fuck, ingred name: ", r.ingredients.get(i).name);
+            abc.add(r.ingredients.get(i).name);
         }
         ArrayAdapter<String> ingredientsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row, R.id.steps, abc);
         ListView ingredientsListView = (ListView) findViewById(R.id.ingredientsList);
@@ -72,24 +76,23 @@ public class RecipeActivity extends AppCompatActivity {
 
         //String[] abc = {"yolo", "swag"};
 
-
         //Instantiate ArrayAdapter for instructions
-        ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
+        ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, r.steps);
         //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
 
         int tempInstructTime[] = {1,2,30, 50,};
-        String instructionTime[] = new String[tempInstructTime.length];
-        for(int i = 0; i < tempInstructTime.length; i++) {
-
-            instructionTime[i] = Integer.toString(tempInstructTime[i]) + " minutes";
+        ArrayList<String> george= new ArrayList<String>();
+        for(int i = 0; i < r.timePerStep.size(); i++) {
+            Log.d("fuck, time per step: ",Integer.toString(r.timePerStep.get(i)) + " minutes");
+            george.add(Integer.toString(r.timePerStep.get(i)) + " minutes");
 
         }
 
 
-        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.clickable_row,R.id.stepTime,instructionTime);
+        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.clickable_row,R.id.stepTime,george);
 
         // Link array adapter to the timer list view
         ListView timerListView = (ListView) findViewById(R.id.timesHere);

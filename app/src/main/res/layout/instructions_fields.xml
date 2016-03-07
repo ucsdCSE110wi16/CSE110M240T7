@@ -20,4 +20,12 @@
         android:singleLine="true"
         android:layout_weight="0.5"/>
 
+    <EditText
+        android:hint="time"
+        android:singleLine="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_instructions_time"
+        android:layout_weight="0.2"/>
+
 </LinearLayout>
