@@ -31,15 +31,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeActivity"
+            android:name=".recipes.RecipeActivity"
             android:label="@string/title_activity_recipe"
-            android:parentActivityName=".RecipeListActivity" >
+            android:parentActivityName=".recipes.RecipeListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.monroe.cse110recipes.RecipeListActivity" />
+                android:value=".recipes.RecipeListActivity" />
         </activity>
         <activity
-            android:name=".RecipeListActivity"
+            android:name=".recipes.RecipeListActivity"
             android:label="@string/title_activity_recipe_list_view"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -47,12 +47,12 @@
                 android:value="com.example.monroe.cse110recipes.MainActivity" />
         </activity>
         <activity
-            android:name=".RecipeCreateActivity"
+            android:name=".recipes.RecipeCreateActivity"
             android:label="@string/title_activity_recipe_create"
-            android:parentActivityName=".RecipeListActivity" >
+            android:parentActivityName=".recipes.RecipeListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.monroe.cse110recipes.RecipeListActivity" />
+                android:value=".recipes.RecipeListActivity" />
         </activity>
     </application>
 

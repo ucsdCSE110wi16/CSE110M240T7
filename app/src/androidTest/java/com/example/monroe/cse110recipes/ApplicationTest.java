@@ -12,6 +12,11 @@ import android.widget.TextView;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import com.example.monroe.cse110recipes.recipes.Recipe;
+import com.example.monroe.cse110recipes.recipes.RecipeCreateActivity;
+import com.example.monroe.cse110recipes.recipes.RecipeListActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
