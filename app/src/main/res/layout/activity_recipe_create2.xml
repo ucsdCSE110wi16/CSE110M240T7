@@ -125,7 +125,7 @@
     <LinearLayout android:id="@+id/instructions_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <include layout="@layout/instructions_fields"></include>
         <include layout="@layout/instructions_fields"></include>
 

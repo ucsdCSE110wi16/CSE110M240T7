@@ -18,6 +18,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private Recipe currentRecipe = null;
     private EditText veditTitle;
     private EditText veditTime;
+    private EditText veditInstruction;
     private RatingBar vratingBar;
     private ImageView vingredientAddButton;
     private LinearLayout vingredientContainer;
@@ -71,6 +72,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         Log.d("tag: ", "veditTitle: " + veditTitle);
         Log.d("tag: ", "veditTime: " + veditTime);
         Log.d("tag: ", "vratingBar: " + vratingBar);
+        Log.d("tag: ", "veditInstruction" + veditInstruction);
         if(getIntent().getExtras() != null && getIntent().getExtras().get("recipeID") != null){
             Integer recipeID = (Integer)getIntent().getExtras().get("recipeID");
             Recipe r = RecipeListActivity.recipes.get(recipeID);
@@ -137,6 +139,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         if(!minutesText.isEmpty())r.minutes = Integer.parseInt(minutesText);
         r.rating = (int)vratingBar.getRating();
         Log.d("tag","num stars: "+((RatingBar)findViewById(R.id.edit_rating)).getRating());
+        
         RecipeListActivity.recipes.put(r.id,r);
         r.saveRecipe();
         finish();
