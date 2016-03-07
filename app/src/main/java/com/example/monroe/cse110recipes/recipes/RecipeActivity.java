@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.monroe.cse110recipes.R;
 
+import java.util.ArrayList;
+
 public class RecipeActivity extends AppCompatActivity {
     // Variables for the Recipe Activity
     private Recipe currentRecipe;   // Selected recipe
@@ -46,12 +48,21 @@ public class RecipeActivity extends AppCompatActivity {
         // Set the currentRecipe as the selected recipe
         Recipe r = RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         currentRecipe = r;
-        Log.d("tag", currentRecipe.favorite?"favorited":"not");
+        Log.d("tag", currentRecipe.favorite ? "favorited" : "not");
 
         //Populate with Recipie's name
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
         //Populate the total cook time
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
+
+        ArrayList<String> abc = new ArrayList<String>();
+        for (int i = 0; i < currentRecipe.ingredients.size(); i++) {
+            abc.add(currentRecipe.ingredients.get(i).name);
+        }
+        ArrayAdapter<String> ingredientsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row, R.id.steps, abc);
+        ListView ingredientsListView = (ListView) findViewById(R.id.ingredientsList);
+        ingredientsListView.setAdapter(ingredientsAdapter);
+
 
         /* String[] abc = {"yolo", "swag"};
         // Instantiate array adapter for ingredients

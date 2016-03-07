@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
+import com.example.monroe.cse110recipes.Ingredients.Ingredient;
 import com.example.monroe.cse110recipes.R;
 
 public class RecipeCreateActivity extends AppCompatActivity {
@@ -104,6 +105,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
         if(!minutesText.isEmpty())r.minutes = Integer.parseInt(minutesText);
         r.rating = (int)vratingBar.getRating();
         Log.d("tag","num stars: "+((RatingBar)findViewById(R.id.edit_rating)).getRating());
+        r.ingredients.add(new Ingredient("yoloswag", 420));
         RecipeListActivity.recipes.put(r.id,r);
         r.saveRecipe();
         finish();
