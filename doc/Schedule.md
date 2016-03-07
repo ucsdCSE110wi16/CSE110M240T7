@@ -37,9 +37,10 @@
  - (react to user feedback)
 
 1. Week 9
- - Enable screenshot of final result of food
+ - finish full recipe load/save implementation
+ - finish displaying recipe data (ingredients, steps, rating, etc.)
+ - minor ui tweaks and changes
  
 1. Week 10
  - Finished product (all fucntionality necessary available)
- - Possibly cosmetic overrides (in-app purchase options, if time permits)
  

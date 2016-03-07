@@ -17,6 +17,8 @@ import android.view.View;
 import com.example.monroe.cse110recipes.DisplayTimer;
 import com.example.monroe.cse110recipes.R;
 
+import java.util.ArrayList;
+
 public class RecipeActivity extends AppCompatActivity {
     // Variables for the Recipe Activity
     private Recipe currentRecipe;   // Selected recipe
@@ -49,7 +51,7 @@ public class RecipeActivity extends AppCompatActivity {
         // Set the currentRecipe as the selected recipe
         Recipe r = RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         currentRecipe = r;
-        Log.d("tag", currentRecipe.favorite?"favorited":"not");
+        Log.d("tag", currentRecipe.favorite ? "favorited" : "not");
 
         //Populate with Recipie's name
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
@@ -57,13 +59,21 @@ public class RecipeActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
 
         String[] itemList = {"Add all the wet ingredients to a large bowl", "whisk until smoooth", "Pour Milk in bowl", "Look at bowl", "add dry ingredients to another bowl and set aside"};
-         String[] abc = {"yolo", "swag"};
-        // Instantiate array adapter for ingredients
+
+        // list the ingredients name
+        ArrayList<String> abc = new ArrayList<String>();
+        for (int i = 0; i < currentRecipe.ingredients.size(); i++) {
+            abc.add(currentRecipe.ingredients.get(i).name);
+        }
         ArrayAdapter<String> ingredientsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row, R.id.steps, abc);
-        // Link array adapter to the ingredients list view
         ListView ingredientsListView = (ListView) findViewById(R.id.ingredientsList);
         ingredientsListView.setAdapter(ingredientsAdapter);
-        //Instantiate ArrayAdapter
+
+
+        //String[] abc = {"yolo", "swag"};
+
+
+        //Instantiate ArrayAdapter for instructions
         ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
         //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);

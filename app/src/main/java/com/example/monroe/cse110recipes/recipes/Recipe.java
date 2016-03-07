@@ -3,6 +3,8 @@ package com.example.monroe.cse110recipes.recipes;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.monroe.cse110recipes.Ingredients.Ingredient;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,6 +40,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
 
     // Recipe data values
     String name; //recipe name
+    ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     int minutes; //time to cook
     int rating; //rating of the recipe
     int id; //id of the recipe??
