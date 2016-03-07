@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Single List Item Design -->
+
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/stepTime"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    android:padding="-3dp"
+    android:textSize="16dip"
+    android:onClick="timerClick" >
+</Button>

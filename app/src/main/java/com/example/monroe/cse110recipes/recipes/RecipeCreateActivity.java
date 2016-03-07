@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
+import com.example.monroe.cse110recipes.Ingredients.Ingredient;
 import com.example.monroe.cse110recipes.R;
 
 public class RecipeCreateActivity extends AppCompatActivity {
@@ -18,9 +19,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private Recipe currentRecipe = null;
     private EditText veditTitle;
     private EditText veditTime;
+    private EditText veditInstruction;
     private RatingBar vratingBar;
     private ImageView vingredientAddButton;
     private LinearLayout vingredientContainer;
+    private ImageView vinstructionAddButton;
+    private LinearLayout vinstructionContainer;
 
     /**
      * When the create activity is started, set up data and views
@@ -46,9 +50,30 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 ((LinearLayout)findViewById(R.id.ingredient_container)).addView(ingredient);
             }
         });
+
+
+        //instructions portion
+        vinstructionAddButton.setOnClickListener(new ImageView.OnClickListener() {
+            public void onClick(View v) {
+                View instruction = getLayoutInflater().inflate((R.layout.instructions_fields), null);
+                instruction.findViewById(R.id.instructions_remove).setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View v){
+                        instructionRemoveClick(v);
+                    }
+
+                });
+                ((LinearLayout)findViewById(R.id.instructions_container)).addView(instruction);
+            }
+        });
+
+
+
+
+
         Log.d("tag: ", "veditTitle: " + veditTitle);
         Log.d("tag: ", "veditTime: " + veditTime);
         Log.d("tag: ", "vratingBar: " + vratingBar);
+        Log.d("tag: ", "veditInstruction" + veditInstruction);
         if(getIntent().getExtras() != null && getIntent().getExtras().get("recipeID") != null){
             Integer recipeID = (Integer)getIntent().getExtras().get("recipeID");
             Recipe r = RecipeListActivity.recipes.get(recipeID);
@@ -63,6 +88,14 @@ public class RecipeCreateActivity extends AppCompatActivity {
      */
     public void ingredientRemoveClick(View v){
         vingredientContainer.removeView((LinearLayout) v.getParent());
+
+    }
+
+    /**
+     * Remove the current view for Instructions
+     */
+    public void instructionRemoveClick(View v){
+        vinstructionContainer.removeView((LinearLayout)v.getParent());
     }
 
     /**
@@ -74,6 +107,9 @@ public class RecipeCreateActivity extends AppCompatActivity {
         vratingBar = ((RatingBar)findViewById(R.id.edit_rating));
         vingredientAddButton = ((ImageView)findViewById(R.id.ingredient_add));
         vingredientContainer = ((LinearLayout)findViewById(R.id.ingredient_container));
+        vinstructionAddButton = ((ImageView)findViewById(R.id.instructions_add));
+        vinstructionContainer = ((LinearLayout)findViewById(R.id.instructions_container));
+
     }
 
     /**
@@ -104,6 +140,18 @@ public class RecipeCreateActivity extends AppCompatActivity {
         if(!minutesText.isEmpty())r.minutes = Integer.parseInt(minutesText);
         r.rating = (int)vratingBar.getRating();
         Log.d("tag","num stars: "+((RatingBar)findViewById(R.id.edit_rating)).getRating());
+
+
+        /** FOR EACH INPUTTED INGREDIENT, ADD INGREDIENTS VIA r.ingredients.add(INGREDIENT) **/
+        // SAMPLE CODE
+        /* for (int i = 0; i < INGREDIENTS FROM LINEARLAYOUT; i==) {
+             r.ingredients.add(new Ingredient(STRING FROM LAYOUT, METRIC FROM LAYOUT);
+           }
+         */
+        // temporary test ingredient.
+        r.ingredients.add(new Ingredient("yoloswag", 420));
+
+
         RecipeListActivity.recipes.put(r.id,r);
         r.saveRecipe();
         finish();

@@ -1,6 +1,7 @@
 package com.example.monroe.cse110recipes.recipes;
 
 import android.content.DialogInterface;
+import android.widget.Button;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -11,8 +12,12 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.view.View;
 
+import com.example.monroe.cse110recipes.DisplayTimer;
 import com.example.monroe.cse110recipes.R;
+
+import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
     // Variables for the Recipe Activity
@@ -46,33 +51,49 @@ public class RecipeActivity extends AppCompatActivity {
         // Set the currentRecipe as the selected recipe
         Recipe r = RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID"));
         currentRecipe = r;
-        Log.d("tag", currentRecipe.favorite?"favorited":"not");
+        Log.d("tag", currentRecipe.favorite ? "favorited" : "not");
 
         //Populate with Recipie's name
         ((TextView)findViewById(R.id.recipe)).setText(r.name);
         //Populate the total cook time
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
 
-        /* String[] abc = {"yolo", "swag"};
-        // Instantiate array adapter for ingredients
+        String[] itemList = {"Add all the wet ingredients to a large bowl", "whisk until smoooth", "Pour Milk in bowl", "Look at bowl", "add dry ingredients to another bowl and set aside"};
+
+        // list the ingredients name
+        ArrayList<String> abc = new ArrayList<String>();
+        for (int i = 0; i < currentRecipe.ingredients.size(); i++) {
+            abc.add(currentRecipe.ingredients.get(i).name);
+        }
         ArrayAdapter<String> ingredientsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row, R.id.steps, abc);
-        // Link array adapter to the ingredients list view
         ListView ingredientsListView = (ListView) findViewById(R.id.ingredientsList);
         ingredientsListView.setAdapter(ingredientsAdapter);
 
-        String[] itemList = {"Pour cereal in bowl first", "Pour Milk in bowl"};
-        //Instantiate ArrayAdapter
+
+        //String[] abc = {"yolo", "swag"};
+
+
+        //Instantiate ArrayAdapter for instructions
         ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
         //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
-        String[] instructionTime ={"1 minute","20 minutes"};
-        // Instantiate array adapter for timers
-        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps,instructionTime);
+
+        int tempInstructTime[] = {1,2,30, 50,};
+        String instructionTime[] = new String[tempInstructTime.length];
+        for(int i = 0; i < tempInstructTime.length; i++) {
+
+            instructionTime[i] = Integer.toString(tempInstructTime[i]) + " minutes";
+
+        }
+
+
+        ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.clickable_row,R.id.stepTime,instructionTime);
+
         // Link array adapter to the timer list view
         ListView timerListView = (ListView) findViewById(R.id.timesHere);
-        timerListView.setAdapter(timerAdapter);*/
+        timerListView.setAdapter(timerAdapter);
     }
 
     /**
@@ -169,9 +190,20 @@ public class RecipeActivity extends AppCompatActivity {
             startActivity(myIntent);
         }
         Log.d("tag", currentRecipe.favorite?"favorited":"not");
-        Log.d("tag", RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID")).favorite?"favorited":"not");
+        Log.d("tag", RecipeListActivity.recipes.get(getIntent().getExtras().get("RecipeID")).favorite ? "favorited" : "not");
 
         return super.onOptionsItemSelected(item);
+
+
+
     }
+
+    public void timerClick(View v){
+        Intent intent = new Intent(this, DisplayTimer.class);
+        String buttonText = ((Button)v).getText().toString();
+        intent.putExtra("string", buttonText);
+        this.startActivity(intent);
+
+    }//end of timerClick method called by clickable_row
 
 }
