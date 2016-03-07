@@ -51,7 +51,7 @@
         android:layout_alignParentLeft="true"
         android:textSize="25sp"
         android:text="@string/ingredient_list"
-        android:textColor="#FFF5E509"
+        android:textColor="#f50909"
         android:textStyle="bold"/>
 
     <ListView
