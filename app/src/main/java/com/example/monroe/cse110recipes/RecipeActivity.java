@@ -42,20 +42,21 @@ public class RecipeActivity extends AppCompatActivity {
         //Populate the total cook time
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
 
-        String[] itemList = {"Pour cereal in bowl first", "Pour Milk in bowl"};
+        String[] itemList = {"Add all the wet ingredients to a large bowl", "whisk until smoooth", "Pour Milk in bowl", "Look at bowl", "add dry ingredients to another bowl and set aside"};
         //Instantiate ArrayAdapter
         ArrayAdapter<String> instructionsAdapter = new ArrayAdapter<String>(this, R.layout.simple_row,R.id.steps, itemList);
         //Link array adapter to the Listview
         ListView stepsListView = (ListView) findViewById(R.id.StartHere);
         stepsListView.setAdapter(instructionsAdapter);
 
-        int tempInstructTime[] = {1,2,3};
-        String instructionTime[] = null;
-        for(int i = 0; i < tempInstructTime.length; i++){
+        int tempInstructTime[] = {1,2,30, 50,};
+        String instructionTime[] = new String[tempInstructTime.length];
+        for(int i = 0; i < tempInstructTime.length; i++) {
 
             instructionTime[i] = Integer.toString(tempInstructTime[i]) + " minutes";
 
         }
+
 
         ArrayAdapter<String> timerAdapter = new ArrayAdapter<String>(this, R.layout.clickable_row,R.id.stepTime,instructionTime);
         ListView timerListView = (ListView) findViewById(R.id.timesHere);

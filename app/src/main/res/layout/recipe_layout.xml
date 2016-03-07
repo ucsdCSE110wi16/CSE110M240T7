@@ -68,7 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/instructions"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/timesHere"
+        android:layout_toStartOf="@+id/timesHere">
         </ListView>
 
     <ListView android:id="@+id/timesHere"

@@ -3,9 +3,10 @@
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/steps"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
     android:textSize="16dip"
-    android:textColor="#FF00" >
+
+    android:textColor="#FF00">
 </TextView>
