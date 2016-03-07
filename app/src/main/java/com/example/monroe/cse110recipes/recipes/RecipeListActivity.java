@@ -99,7 +99,7 @@ public class RecipeListActivity extends AppCompatActivity {
 //        setSupportActionBar(myToolbar);
         // Create a new liew view to display recipes
         final ListView listview = (ListView) findViewById(R.id.listview);
-        if(recipes.size() == 0) {
+//        if(recipes.size() == 0) {
             Recipe r = new Recipe();
             String[] values = new String[] {};
             ArrayList<Recipe> recipes1 = new ArrayList<Recipe>();
@@ -113,9 +113,9 @@ public class RecipeListActivity extends AppCompatActivity {
 //                Recipe r = new Recipe(values[i], 30, 2);
 //                recipes.put(r.id, r);
 //            }
-        }
-        else {
-        }
+//        }
+//        else {
+//        }
 
         // Create a new ArrayList to contain recipes
         final ArrayList<Recipe> list2 = new ArrayList<Recipe>();
