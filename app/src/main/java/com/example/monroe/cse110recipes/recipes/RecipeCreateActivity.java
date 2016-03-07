@@ -14,6 +14,8 @@ import android.widget.RatingBar;
 import com.example.monroe.cse110recipes.Ingredients.Ingredient;
 import com.example.monroe.cse110recipes.R;
 
+import java.util.ArrayList;
+
 public class RecipeCreateActivity extends AppCompatActivity {
     // Recipe values to be edited upon creation
     private Recipe currentRecipe = null;
@@ -143,13 +145,28 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
         /** FOR EACH INPUTTED INGREDIENT, ADD INGREDIENTS VIA r.ingredients.add(INGREDIENT) **/
+
+        ArrayList<View> ingredients = new ArrayList<View>();
+        LinearLayout ingreCont = (LinearLayout)findViewById(R.id.ingredient_container);
+        final int childCount = ingreCont.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            final View child = ingreCont.getChildAt(i);
+            String name = ((EditText)child.findViewById(R.id.edit_ingredient_title)).getText().toString();
+            String metric = ((EditText)child.findViewById(R.id.edit_ingredient_metric)).getText().toString();
+            Float amt = null;
+            String amtString = ((EditText)child.findViewById(R.id.edit_ingredient_metric)).getText().toString();
+            if (!amtString.isEmpty()) amt = Float.parseFloat(amtString);
+            Ingredient ing = new Ingredient(name, amt, metric);
+            r.ingredients.add((ing));
+
+        }
         // SAMPLE CODE
         /* for (int i = 0; i < INGREDIENTS FROM LINEARLAYOUT; i==) {
              r.ingredients.add(new Ingredient(STRING FROM LAYOUT, METRIC FROM LAYOUT);
            }
          */
         // temporary test ingredient.
-        r.ingredients.add(new Ingredient("yoloswag", 420));
+//        r.ingredients.add(new Ingredient("yoloswag", 420));
 
 
         RecipeListActivity.recipes.put(r.id,r);

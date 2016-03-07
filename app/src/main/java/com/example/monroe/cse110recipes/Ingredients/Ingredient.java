@@ -1,13 +1,18 @@
 package com.example.monroe.cse110recipes.Ingredients;
 
+import java.io.Serializable;
+
 /**
  * Created by tqhoang on 3/7/16.
  */
-public class Ingredient {
+public class Ingredient   implements Serializable {
     public String name;
-    public int amount;
+    public Float amount;
+    public String metric;
+    static final long serialVersionUID = -687991492884005034L;
 
-    public Ingredient(String s, int i) {
+
+    public Ingredient(String s, Float i, String metric) {
         name = s;
         amount = i;
     }
