@@ -51,8 +51,8 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
     String[] tags; //the series of tags that can be used to search for the recipe
     int difficulty; //difficulty level
     String lastUsed; //date the recipe was last accessed
-    String[] steps; //list of the steps in string format, ordered chronologically
-    int[] timePerStep; //time that each step takes, indexed the same as steps[]
+    ArrayList<String> steps = new ArrayList<>(); //list of the steps in string format, ordered chronologically
+    ArrayList<Integer> timePerStep = new ArrayList<>(); //time that each step takes, indexed the same as steps[]
 /*
     public final String DATABASE_CREATE_OBJECT = "create table " +
             this.name + "(" + COLUMN_ID + "integer primary key autoincrement, "

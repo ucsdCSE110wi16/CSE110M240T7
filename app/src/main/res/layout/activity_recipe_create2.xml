@@ -95,8 +95,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <!--<include layout="@layout/ingredients_fields"></include>-->
-        <include layout="@layout/ingredients_fields2"></include>
-        <include layout="@layout/ingredients_fields2"></include>
+        <!--<include layout="@layout/ingredients_fields2"></include>-->
+        <!--<include layout="@layout/ingredients_fields2"></include>-->
     </LinearLayout>
 
     <!---<Adding instructions here>-->

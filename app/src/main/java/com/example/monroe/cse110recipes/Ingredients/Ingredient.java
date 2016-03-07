@@ -12,8 +12,9 @@ public class Ingredient   implements Serializable {
     static final long serialVersionUID = -687991492884005034L;
 
 
-    public Ingredient(String s, Float i, String metric) {
+    public Ingredient(String s, Float i, String m) {
         name = s;
         amount = i;
+        metric = m;
     }
 }

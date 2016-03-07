@@ -122,6 +122,21 @@ public class RecipeCreateActivity extends AppCompatActivity {
         veditTitle.setText(r.name);
         veditTime.setText(r.minutes + "");
         vratingBar.setRating((float) r.rating);
+        for(int i=0;i<r.ingredients.size();i++){
+            View ingredient = getLayoutInflater().inflate((R.layout.ingredients_fields2), null);
+            ((EditText)ingredient.findViewById(R.id.edit_ingredient_title)).setText(r.ingredients.get(i).name);
+            ((EditText)ingredient.findViewById(R.id.edit_ingredient_metric)).setText(r.ingredients.get(i).metric);
+            ((EditText)ingredient.findViewById(R.id.edit_ingredient_amt)).setText(r.ingredients.get(i).amount == null ? "" : r.ingredients.get(i).amount.toString());
+            ingredient.findViewById(R.id.ingredient_remove).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    ingredientRemoveClick(v);
+                }
+
+            });
+            ((LinearLayout)findViewById(R.id.ingredient_container)).addView(ingredient);
+
+
+        }
     }
 
     /**
