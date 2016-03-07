@@ -44,20 +44,26 @@
             android:text="minutes"
             android:textColor="#FF071FF7"/>
 
-        <TextView android:id="@+id/ingredients"
-            android:layout_width= "match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/time_units"
-            android:layout_alignParentLeft="true"
-            android:textSize="25sp"
-            android:text="@string/ingredient_list"
-            android:textColor="#FFF5E509"
-            android:textStyle="bold"/>
+    <TextView android:id="@+id/ingredients"
+        android:layout_width= "match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_units"
+        android:layout_alignParentLeft="true"
+        android:textSize="25sp"
+        android:text="@string/ingredient_list"
+        android:textColor="#FFF5E509"
+        android:textStyle="bold"/>
 
-        <TextView android:id="@+id/instructions"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredients"
+        android:id="@+id/ingredientsList" />
+
+    <TextView android:id="@+id/instructions"
             android:layout_width= "wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ingredients"
+            android:layout_below="@id/ingredientsList"
             android:layout_alignParentLeft="true"
             android:textSize="25sp"
             android:text="@string/instruction_list"
