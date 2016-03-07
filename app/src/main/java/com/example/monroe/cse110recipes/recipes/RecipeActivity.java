@@ -55,6 +55,7 @@ public class RecipeActivity extends AppCompatActivity {
         //Populate the total cook time
         ((TextView)findViewById(R.id.cook_Time)).setText(String.valueOf(r.getMinutes()));
 
+        // liist the ingredients name
         ArrayList<String> abc = new ArrayList<String>();
         for (int i = 0; i < currentRecipe.ingredients.size(); i++) {
             abc.add(currentRecipe.ingredients.get(i).name);
