@@ -99,22 +99,22 @@ public class RecipeListActivity extends AppCompatActivity {
 //        setSupportActionBar(myToolbar);
         // Create a new liew view to display recipes
         final ListView listview = (ListView) findViewById(R.id.listview);
-        if(recipes.size() == 0){
+        if(recipes.size() == 0) {
             Recipe r = new Recipe();
-            String[] values = new String[] { "Pasta fagu", "Cereal", "Oatmeal Paradise",
-                    "Chicken and Taters", "Thanksgiving Dinner", "Milk", "Ramen", "Ramen (top)",
-                    "Curry (Steph)", "Netflix and Chili", "Spaghetti"};
+            String[] values = new String[] {};
             ArrayList<Recipe> recipes1 = new ArrayList<Recipe>();
             recipes1 = r.readRecipes();
             for (int i = 0; i < recipes1.size(); i++) {
                 r = recipes1.get(i);
-                //recipes.put(r.id, r);
+                if (r == null) continue;
+                recipes.put(recipes1.get(i).id, recipes1.get(i));
             }
 //            for (int i = 0; i < values.length; ++i) {
 //                Recipe r = new Recipe(values[i], 30, 2);
 //                recipes.put(r.id, r);
 //            }
-
+        }
+        else {
         }
 
         // Create a new ArrayList to contain recipes
