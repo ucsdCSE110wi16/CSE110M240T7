@@ -321,7 +321,7 @@ public class Recipe  implements Serializable {//extends SQLiteOpenHelper{
         FileInputStream inStream = null;
         try {
             // Open file and read
-            File f = new File(Environment.getExternalStorageDirectory(), name);
+            File f = new File(new File(Environment.getExternalStorageDirectory(),RECIPE_FOLDER_NAME), name);
             inStream = new FileInputStream(f);
             ObjectInputStream objectInStream = new ObjectInputStream(inStream);
 
