@@ -1,0 +1,9 @@
+Final touches needed:
+- tests (Bao)
+- recipes should show how much of each ingredient each needs
+  in the view
+- test how each step looks, given a long step 
+  (more than 1 line), make changes if needed
+- do the same for ingredients (though less priority,
+  assuming that each ingredient name does not need 
+  more than one line)
