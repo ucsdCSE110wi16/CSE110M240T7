@@ -4,7 +4,6 @@ import android.app.Instrumentation.ActivityMonitor;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.monroe.cse110recipes.recipes.RecipeCreateActivity;
 import com.example.monroe.cse110recipes.recipes.RecipeListActivity;
 
 import org.junit.Rule;
@@ -12,15 +11,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.Matchers.anything;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -28,6 +22,9 @@ public class ApplicationTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
+    @Rule
+    public ActivityTestRule<RecipeListActivity> rActivityRule = new ActivityTestRule(RecipeListActivity.class);
+
 
     @Test
     public void Test1(){
@@ -41,8 +38,30 @@ public class ApplicationTest {
         nextActivity.finish();
     }
 
+    @Test
+    public void Test2(){
 
+        ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeListActivity.class.getName(), null, false);
+        onView(withId(R.id.button4)).perform(click());
+        RecipeListActivity nextActivity = (RecipeListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+        // next activity is opened and captured.
+        assertNotNull(nextActivity);
 
+        nextActivity.finish();
+    }
+
+    @Test
+    public void Test3(){
+
+        ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeListActivity.class.getName(), null, false);
+        onView(withId(R.id.button5)).perform(click());
+        RecipeListActivity nextActivity = (RecipeListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+        // next activity is opened and captured.
+        assertNotNull(nextActivity);
+
+        nextActivity.finish();
+    }
+/*
     @Test
     public void Test2() {
 
@@ -53,8 +72,8 @@ public class ApplicationTest {
         assertNotNull(nextActivity);
         nextActivity.finish();
     }
-
-
+*/
+/*
 
    @Test
     public void Test3() {
@@ -75,10 +94,10 @@ public class ApplicationTest {
         onView(withId(R.id.cook_Time)).check(matches(withText("10")));
 
     }
-
-
+*/
 
 /*
+
     @Test
     public void Test4(){
 
@@ -98,7 +117,8 @@ public class ApplicationTest {
         Espresso.pressBack();
         Espresso.pressBack();
         onView(withId(R.id.button5)).perform(click());
-    }*/
+    }
+*/
    /* public static Matcher<Object> withItemContent(String expectedText) {
         checkNotNull(expectedText);
         return withItemContent(equalTo(expectedText));
@@ -146,9 +166,9 @@ public class ApplicationTest {
     }
 };
 }*/
-
+/*
     //@SuppressWarnings("unchecked")
-   /* @Test
+    @Test
     public void test5() {
         onView(withId(R.id.button3)).perform(click());
         onView(withId(R.id.action_add)).perform(click());
@@ -163,10 +183,10 @@ public class ApplicationTest {
         onView(withId(R.id.edit_rating)).perform(click());
         onView(withId(R.id.action_save)).perform(click());
 
-        onView(withId(R.id.filter_recipe_name)).perform(click(), typeText("Apple"));
+        onView(withId(R.id.filter_recipe_name)).perform(click(), typeText("Banana"));
         onView(withId(R.id.filter_button)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
-        onView(allOf(withId(R.id.recipe), withText("TestFilter_Apple"))).check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.recipe), withText("TestFilter_Banana"))).check(matches(isDisplayed()));
 
         //onView(withId(R.id.recipe)).check(matches(withText("TestFilter_Apple")));
         //onView(withId(R.id.recipe)).check(matches(withText("TestFilter_Apple")));
@@ -174,7 +194,7 @@ public class ApplicationTest {
 
         /*onView(withId(R.id.listview))
                 .check(matches(not(withAdaptedData(withItemContent("hello")))));*/
-   // }
+    //}
 
   /*  public void testFilter() {
         onView(withId(R.id.button3)).perform(click());
