@@ -12,11 +12,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.Matchers.anything;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -52,7 +56,7 @@ public class ApplicationTest {
 
 
 
-  /*  @Test
+   @Test
     public void Test3() {
         ActivityMonitor activityMonitor = getInstrumentation().addMonitor(RecipeCreateActivity.class.getName(), null, false);
         onView(withId(R.id.button3)).perform(click());
@@ -61,14 +65,14 @@ public class ApplicationTest {
         onView(withId(R.id.edit_time)).perform(click(), typeText("10"));
         onView(withId(R.id.edit_rating)).perform(click());
         onView(withId(R.id.action_save)).perform(click());
-        RecipeListActivity r = new RecipeListActivity();
-        (r.recipes.get(0).getName());
+        //RecipeListActivity r = new RecipeListActivity();
+        //(r.recipes.get(0).getName());
 
 
-        //onData(anything()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
 
-       // onView(withId(R.id.recipe)).check(matches(withText("TestSaveButton")));
-        //onView(withId(R.id.cook_Time)).check(matches(withText("10")));
+        onView(withId(R.id.recipe)).check(matches(withText("TestSaveButton")));
+        onView(withId(R.id.cook_Time)).check(matches(withText("10")));
 
     }
 
@@ -179,6 +183,7 @@ public class ApplicationTest {
 
 
     }*/
+
 
 
 
