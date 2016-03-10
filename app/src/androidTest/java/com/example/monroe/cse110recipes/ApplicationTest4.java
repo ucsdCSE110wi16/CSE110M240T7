@@ -41,9 +41,10 @@ public class ApplicationTest4 {
         onView(withId(R.id.action_save)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
 
-        
-        onView(withId(R.id.action_edit)).perform(click());
+
+       // onView(withId(R.id.action_edit)).perform(click());
         //openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withId(R.id.action_edit)).perform(click());
         //onData(anything()).equals(withId(R.id.action_edit)).perform(click());
         RecipeActivity nextActivity = (RecipeActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
         // next activity is opened and captured.

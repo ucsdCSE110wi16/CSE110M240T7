@@ -39,7 +39,7 @@ public class ApplicationTest3 {
         onView(withId(R.id.edit_rating)).perform(click());
         onView(withId(R.id.action_save)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.listview)).atPosition(0).perform(click());
-        RecipeActivity nextActivity = (RecipeActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5000);
+        RecipeActivity nextActivity = (RecipeActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 50);
         // next activity is opened and captured.
         assertNotNull(nextActivity);
         nextActivity.finish();
