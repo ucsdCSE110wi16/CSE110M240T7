@@ -21,6 +21,10 @@ import static org.hamcrest.Matchers.anything;
 /**
  * Created by liangbao on 3/10/16.
  */
+
+// This class is to test save button works fine.
+
+
 public class ApplicationTest3 {
 
     @Rule

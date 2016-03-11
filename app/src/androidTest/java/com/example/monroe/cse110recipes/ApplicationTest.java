@@ -17,6 +17,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.Assert.assertNotNull;
 
 
+// This test class is to test the 3 button in the main page work fine
+
 @RunWith(AndroidJUnit4.class)
 public class ApplicationTest {
 

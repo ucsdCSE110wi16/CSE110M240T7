@@ -21,6 +21,9 @@ import static junit.framework.Assert.assertNotNull;
  * Created by liangbao on 3/9/16.
  */
 
+
+// This test class is to test add button works fine.
+
 @RunWith(AndroidJUnit4.class)
 public class ApplicationTest2 {
 
